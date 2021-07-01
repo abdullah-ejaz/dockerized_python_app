@@ -44,12 +44,14 @@ pipeline{
         stage("Push image"){
             steps{
                 script {
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                     // configure registry
-                    docker.withRegistry( '489994096722.dkr.ecr.us-east-2.amazonaws.com' , 'ecr:us-east-2:abdullah_jenkins_ecr')
-                    {
-                        def myImage = app.push("abd-sample-pythonapp")            
-                        myImage.push("latest")     
-                    }
+                    // docker.withRegistry( '489994096722.dkr.ecr.us-east-2.amazonaws.com' , 'ecr:us-east-2:abdullah_jenkins_ecr')
+                    // {
+                    //     def myImage = app.push("abd-sample-pythonapp")            
+                    //     myImage.push("latest")     
+                    // }
                 }
             }
         }
