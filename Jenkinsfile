@@ -5,6 +5,10 @@ pipeline{
     registry = '489994096722.dkr.ecr.us-east-2.amazonaws.com/abdullah_jenkins_ecr'
     // registryCredential = 'ecr:us-east-2'
     AWS_DEFAULT_REGION = 'us-east-2'
+    AWS_ACCOUNT_ID="489994096722"
+    IMAGE_REPO_NAME="abdullah_jenkins_ecr"
+    IMAGE_TAG="latest"
+    REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"    
              }    
     stages{
         stage("Git_Checkout"){
@@ -30,6 +34,13 @@ pipeline{
                 }
             }   
         }
+            stage('Logging into AWS ECR') {
+            steps {
+                script {
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                }
+            }
+        }    
         stage("Push image"){
             steps{
                 script {
