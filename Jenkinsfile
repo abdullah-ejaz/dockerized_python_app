@@ -36,8 +36,8 @@ pipeline{
                     // configure registry
                     docker.withRegistry( ${registry} , ${AWS_DEFAULT_REGION})
                     {
-                        app.push("${env.BUILD_NUMBER}")            
-                        app.push("latest")     
+                        def myImage = app.push("abd-sample-pythonapp")            
+                        myImage.push("latest")     
                     }
                 }
             }
