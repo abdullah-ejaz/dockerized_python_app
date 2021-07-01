@@ -34,7 +34,7 @@ pipeline{
             steps{
                 script {
                     // configure registry
-                    docker.withRegistry( ${registry} , ${AWS_DEFAULT_REGION})
+                    docker.withRegistry( '489994096722.dkr.ecr.us-east-2.amazonaws.com' , 'ecr:us-east-2:abdullah_jenkins_ecr')
                     {
                         def myImage = app.push("abd-sample-pythonapp")            
                         myImage.push("latest")     
