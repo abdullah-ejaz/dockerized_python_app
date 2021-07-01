@@ -21,7 +21,7 @@ pipeline{
         stage("Build image"){
             steps{
                 script {
-                    app = docker.build("abd-sample-pythonapp") 
+                    app = docker.build"${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }
             }   
         }
