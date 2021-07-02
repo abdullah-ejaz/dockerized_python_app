@@ -12,4 +12,4 @@ def hello():
     redis.incr('totalhits')
     return 'A warm hello from container no %s ! I have been seen %s times.' %(socket.gethostname(), redis.get('totalhits'))
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", debug=True, port=5000)
