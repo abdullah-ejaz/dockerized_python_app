@@ -13,4 +13,5 @@ RUN apk add --update \
     # python-dev \
     py-pip &&\
     pip install -r requirements.txt
-CMD ["python", "app.py"]
+EXPOSE 6379 5000    
+CMD ["python", "app.py","redis-server"]
